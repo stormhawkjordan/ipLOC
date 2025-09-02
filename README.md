@@ -31,3 +31,5 @@ Install them on Linux Mint / Ubuntu:
 sudo apt update
 sudo apt install curl jq network-manager -y
 
+🚀 Installation
+1. Clone this repository
