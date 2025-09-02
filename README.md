@@ -1,110 +1,73 @@
-# 🌐 ipLOC VPN Checker
+# ipLOC - A simple, easy to use IP checker
 
-A lightweight and simple VPN/IP status checker script for Ubuntu based Linux distributions such as Linux Mint.  
-**It Checks your VPN connection, shows your public IP, and provides detailed IP geolocation info.**
+ipLOC is a simple and lightweight IP status tool that can be run from one command: iploc 
 
----
+## What does it do?
 
-## 🛠 Features
+ipLOC:
+- Checks if your VPN is connected
+- Retrieves your public IP address
+- Provides IP Geolocation (country, region, ISP, org)
+- Identifies your active VPN client and protocol
+- Warns you if your real IP is exposed
 
-- ✅ Check if your VPN is connected (via NetworkManager)
-- 🌍 Display your **public IP address**
-- 🧭 Fetch geolocation info: **country**, **region**, **city**, **ISP**, and **organization**
-- 🔐 Detect VPN **client** and **protocol**
-- 🎨 Cool ASCII banner with a retro touch cause why not
+It is recommended to run iploc before starting a torrent or web browsing, so you dont leak your IP address. Bonus security if you bind your VPN to your torrent client!
 
----
+## Requirements
 
-## 📦 Requirements
+This script is designed for **Debian** based Linux distributions, such as **Linux Mint** and **Ubuntu**
 
-Make sure these tools are installed:
+Make sure the following dependencies are installed:
+- curl - Fetches your public IP address
+- jq - Parses JSON from API response
+- nmcli - Checks VPN status via NetworkManager
 
-| Tool       | Purpose                         |
-|------------|----------------------------------|
-| `curl`     | Fetches your public IP address  |
-| `jq`       | Parses JSON from API response   |
-| `nmcli`    | Checks VPN status via NetworkManager |
-
-Install them on Linux Mint / Ubuntu:
+To install these, open a Terminal and run: 
 
 ```bash
 sudo apt update
 sudo apt install curl jq network-manager -y
+```
 
-## 📦 Installation
-1. Clone the repository:
+## Installation
 
-git clone https://github.com/yourusername/iploc-vpn-checker.git
-cd iploc-vpn-checker
+**1: Clone this repository**
 
+```bash
+git clone https://github.com/stormhawkjordan/iploc.git
 
+cd iploc
+```
 
+**2: Make the script executable**
+```bash
+chmod +x iploc.sh
+```
 
+**3 Move to /usr/local/bin to use the iploc command anywhere**
 
+```bash
+sudo cp iploc.sh /usr/local/bin/iploc
+```
+## Usage
 
+From inside the repo directory:
+```bash
+./iploc.sh
+```
 
+**Globally (if moved to /usr/local/bin)**
 
+```bash
+iploc
+```
 
+## Credits
+- Script by stormhawkjordan
+- ASCII art via patorjk.com/software/taag
+- IP Geolocation API by ip-api.com
 
+## License
+This script is released with the MIT License
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+You are free to use, modify and distribute it. Credit is appreciated!
