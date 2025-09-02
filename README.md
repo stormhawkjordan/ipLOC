@@ -66,6 +66,7 @@ iploc
 - Script by stormhawkjordan
 - ASCII art via patorjk.com/software/taag
 - IP Geolocation API by ip-api.com
+- Readme generated with readme.so
 
 ## License
 This script is released with the MIT License
