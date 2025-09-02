@@ -31,5 +31,80 @@ Install them on Linux Mint / Ubuntu:
 sudo apt update
 sudo apt install curl jq network-manager -y
 
-🚀 Installation
-1. Clone this repository
+## 📦 Installation
+1. Clone the repository:
+
+git clone https://github.com/yourusername/iploc-vpn-checker.git
+cd iploc-vpn-checker
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
