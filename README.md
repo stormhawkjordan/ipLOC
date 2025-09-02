@@ -1,4 +1,4 @@
-# ipLOC - A simple, easy to use IP checker
+# ipLOC - A simple, easy to use IP checker for Debian based distributions
 
 ipLOC is a simple and lightweight IP status tool that can be run from one command: iploc  
  
