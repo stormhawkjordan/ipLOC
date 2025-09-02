@@ -1,0 +1,132 @@
+#!/bin/bash
+
+# ============================================================
+# ipLOC VPN Checker Script
+# by stormhawkjordan with ASCII art by patorjk.com/software/taag/
+# This script is open-source and available at:
+# https://github.com/yourusername/iploc-vpn-checker
+#
+# Purpose: This script checks the status of your VPN connection,
+# retrieves your public IP address, and provides geolocation info.
+# It is open-source software that you are free to use and distribute, however,
+# credits would be greatly appreciated!
+# ============================================================
+
+# Function to print the ASCII Logo
+print_logo() {
+    echo "==========================================================="
+    echo "                  Welcome to ipLOC!"
+    echo "==========================================================="
+    echo "                                  ___       ___           ___     "
+    echo "       ___         ___          /  /\     /  /\         /  /\    "
+    echo "      /__/\       /  /\        /  /:/    /  /::\       /  /::\   "
+    echo "      \__\:\     /  /::\      /  /:/    /  /:/\:\     /  /:/\:\  "
+    echo "      /  /::\   /  /:/\:\    /  /:/    /  /:/  \:\   /  /:/  \:\ "
+    echo "   __/  /:/\/  /  /::\ \:\  /__/:/    /__/:/ \__\:\ /__/:/ \  \:\\"
+    echo "  /__/\/:/~~  /__/:/\:\_\:\ \  \:\    \  \:\ /  /:/ \  \:\  \__\/"
+    echo "  \  \::/     \__\/  \:\/:/  \  \:\    \  \:\  /:/   \  \:\      "
+    echo "   \  \:\          \  \::/    \  \:\    \  \:\/:/     \  \:\     "
+    echo "    \__\/           \__\/      \  \:\    \  \::/       \  \:\    "
+    echo "                                \__\/     \__\/         \__\/    "
+    echo 
+    echo "Checking your IP since '25"
+    echo "==========================================================="
+    echo
+    echo 
+    echo "Check the Github page for updates!"
+    echo
+    echo
+}
+
+# Function to check if VPN is connected
+is_vpn_connected() {
+    vpn_status=$(nmcli con show --active | grep vpn)
+    if [[ -n "$vpn_status" ]]; then
+        echo "VPN is connected."
+        return 0
+    else
+        echo "VPN is not connected."
+        return 1
+    fi
+}
+
+# Function to get the VPN protocol being used
+get_vpn_protocol() {
+    vpn_protocol=$(nmcli con show --active | grep vpn | awk '{print $3}')
+    if [[ -n "$vpn_protocol" ]]; then
+        echo "Your VPN is using the $vpn_protocol protocol."
+    else
+        echo "No VPN protocol found. Make sure you're connected to a VPN."
+    fi
+}
+
+# Function to get the VPN client being used
+get_vpn_client() {
+    vpn_client=$(nmcli con show --active | grep vpn | awk '{print $1}')
+    if [[ -n "$vpn_client" ]]; then
+        echo "Your VPN client is: $vpn_client."
+    else
+        echo "No VPN client detected. Make sure you're connected to a VPN."
+    fi
+}
+
+# Function to get the public IP address
+get_public_ip() {
+    public_ip=$(curl -s ifconfig.me)
+    echo "$public_ip"
+}
+
+# Function to get the IP geolocation information
+get_ip_info() {
+    ip=$1
+    ip_info=$(curl -s "http://ip-api.com/json/$ip?fields=country,region,city,isp,org,query")
+    echo "$ip_info" | jq .
+}
+
+# Main function that will run the whole script
+main() {
+    # Print ASCII logo
+    print_logo
+
+    # Get the public IP address
+    public_ip=$(get_public_ip)
+    echo "Your public IP address is: $public_ip"
+
+    # Get detailed info for the IP
+    echo "Fetching information for IP address $public_ip..."
+    ip_info=$(get_ip_info $public_ip)
+    
+    # Display the IP info
+    echo "IP Information:"
+    echo "$ip_info" | jq -r '."country", ."region", ."city", ."isp", ."org"'
+
+    # Check if the IP is from the VPN
+    if is_vpn_connected; then
+        echo "The IP is from the VPN. You are protected."
+    else
+        echo "The IP is not from the VPN. Your Public IP is exposed. Turn on the VPN to hide it, and run the command again."
+    fi
+
+    # Present options to the user
+    echo
+    echo "Press 1 to check VPN info (protocol and client), or press 2 to exit."
+    read -p "Choose an option: " choice
+
+    if [[ "$choice" -eq 1 ]]; then
+        # Get VPN protocol and client info
+        get_vpn_protocol
+        get_vpn_client
+    elif [[ "$choice" -eq 2 ]]; then
+        echo "Exiting... Goodbye!"
+        exit 0
+    else
+        echo "Invalid option. Please press 1 for VPN info or 2 to exit."
+        main
+    fi
+}
+
+# Check if the script is run directly (instead of being sourced)
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main
+fi
+
