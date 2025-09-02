@@ -4,8 +4,7 @@
 # ipLOC VPN Checker Script
 # by stormhawkjordan with ASCII art by patorjk.com/software/taag/
 # This script is open-source and available at:
-# https://github.com/yourusername/iploc-vpn-checker
-#
+# https://github.com/stormhawkjordan/ipLOC
 # Purpose: This script checks the status of your VPN connection,
 # retrieves your public IP address, and provides geolocation info.
 # It is open-source software that you are free to use and distribute, however,
