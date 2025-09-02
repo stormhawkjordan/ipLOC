@@ -1,6 +1,6 @@
 # ipLOC - A simple, easy to use IP checker
 
-ipLOC is a simple and lightweight IP status tool that can be run from one command: iploc 
+ipLOC is a simple and lightweight IP status tool that can be run from one command: iploc  
  
 ## What does it do?
 
