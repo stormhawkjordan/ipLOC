@@ -41,19 +41,19 @@ cd iploc
 
 **2: Make the script executable**
 ```bash
-chmod +x iploc.sh
+chmod +x iploc
 ```
 
 **3 Move to /usr/local/bin to use the iploc command anywhere**
 
 ```bash
-sudo cp iploc.sh /usr/local/bin/iploc
+sudo cp iploc /usr/local/bin/iploc
 ```
 ## Usage
 
 From inside the repo directory:
 ```bash
-./iploc.sh
+./iploc
 ```
 
 **Globally (if moved to /usr/local/bin)**
