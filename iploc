@@ -37,7 +37,7 @@ print_logo() {
     echo
 }
 
-# Function to check if VPN is connected
+# check if VPN is connected
 is_vpn_connected() {
     vpn_status=$(nmcli con show --active | grep vpn)
     if [[ -n "$vpn_status" ]]; then
@@ -49,7 +49,7 @@ is_vpn_connected() {
     fi
 }
 
-# Function to get the VPN protocol being used
+# get the VPN protocol being used
 get_vpn_protocol() {
     vpn_protocol=$(nmcli con show --active | grep vpn | awk '{print $3}')
     if [[ -n "$vpn_protocol" ]]; then
@@ -59,7 +59,7 @@ get_vpn_protocol() {
     fi
 }
 
-# Function to get the VPN client being used
+# Get the VPN client being used
 get_vpn_client() {
     vpn_client=$(nmcli con show --active | grep vpn | awk '{print $1}')
     if [[ -n "$vpn_client" ]]; then
@@ -69,13 +69,13 @@ get_vpn_client() {
     fi
 }
 
-# Function to get the public IP address
+# Get the public IP address
 get_public_ip() {
     public_ip=$(curl -s ifconfig.me)
     echo "$public_ip"
 }
 
-# Function to get the IP geolocation information
+# Get the IP geolocation information
 get_ip_info() {
     ip=$1
     ip_info=$(curl -s "http://ip-api.com/json/$ip?fields=country,region,city,isp,org,query")
@@ -87,19 +87,19 @@ main() {
     # Print ASCII logo
     print_logo
 
-    # Get the public IP address
+    # Get public IP address
     public_ip=$(get_public_ip)
     echo "Your public IP address is: $public_ip"
 
-    # Get detailed info for the IP
+    # Get info for the IP
     echo "Fetching information for IP address $public_ip..."
     ip_info=$(get_ip_info $public_ip)
     
-    # Display the IP info
+    # Display IP info
     echo "IP Information:"
     echo "$ip_info" | jq -r '."country", ."region", ."city", ."isp", ."org"'
 
-    # Check if the IP is from the VPN
+    # Check if IP is from the VPN
     if is_vpn_connected; then
         echo "The IP is from the VPN. You are protected."
     else
